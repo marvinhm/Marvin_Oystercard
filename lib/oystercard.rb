@@ -1,7 +1,17 @@
-require 'pry'
+# frozen_string_literal: true
+
+# require 'pry'
+
+class Station
+  attr_reader :name, :zone
+
+  def initialize(name, zone)
+    @name = name
+    @zone = zone
+  end
+end
 
 class Oystercard
-
   DEFAULT_BALANCE = 0
   MAXIMUM_BALANCE = 90
   MINUMUM_BALANCE = 1
@@ -15,20 +25,21 @@ class Oystercard
     @entry_station = nil
     @exit_station = nil
     @all_journeys = []
-    @one_journey = {@entry_station => @exit_station}
+    @one_journey = { @entry_station => @exit_station }
   end
 
   def top_up(amount)
     raise("Maximum limit of #{MAXIMUM_BALANCE} exceded") if @balance + amount > MAXIMUM_BALANCE
+
     @balance += amount
     puts "Topped up £#{amount}. New balance: £#{@balance}"
-    return @balance
+    @balance
   end
 
   def touch_in(station)
     @entry_station = station
-    @one_journey = {station => @exit_station}
-    @balance < MINUMUM_BALANCE ? raise("Insufficient funds") : @in_journey = true 
+    @one_journey = { station => @exit_station }
+    @balance < MINUMUM_BALANCE ? raise('Insufficient funds') : @in_journey = true
   end
 
   def touch_out(station)
@@ -53,7 +64,6 @@ class Oystercard
   # def limit_exceded?
   #   @balance > 90
   # end
-
 end
 
-binding.pry
+# binding.pry

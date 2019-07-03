@@ -74,8 +74,25 @@ describe Oystercard do
       subject.top_up 5
       subject.touch_in "Kings Cross"
       subject.touch_out "Hammersmith"
-      expect(subject.all_journeys).to eq ({"Kings Cross" => "Hammersmith"})
+      expect(subject.all_journeys).to eq ([{"Kings Cross" => "Hammersmith"}])
     end
   end
 
+end
+
+
+describe Station do
+  subject(:station){ described_class.new }
+  let(:name) {double :name}
+  let(:zone) {double :zone}
+
+  it 'Has a name and a zone' do
+    station = Station.new(name, zone)
+    expect(station.name).to eq(name)
+  end
+
+  it 'Has a zone' do
+    station = Station.new(name, zone)
+    expect(station.zone).to eq(zone)
+  end
 end
