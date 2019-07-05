@@ -19,6 +19,17 @@ describe Journey do
       subject.touch_in(station_name)
       expect{subject.touch_in(station_name)}.to raise_error("You have already tapped in!")
     end
+
+    it "allows a user to know where they've travelled from" do
+      subject.touch_in(station_name)
+      expect(subject.entry_station).to eq station_name
+    end
+
+    it "allows a user to know where they've travelled to" do
+      subject.touch_in(station_name)
+      subject.touch_out(station_name)
+      expect(subject.exit_station).to eq station_name
+    end
   end
 
   it "allows a user to know where they've travelled from" do
@@ -73,6 +84,11 @@ describe Journey do
       subject.touch_in(station_name)
       subject.touch_out(station_name)
       expect(subject.fare).to eq(Journey::MINIMUM_FARE)
+    end
+
+    it 'Should return penalty fare' do
+      subject.touch_in(station_name)
+      expect(subject.fare).to eq(Journey::PENALTY_FARE)
     end
   end
 end

@@ -17,7 +17,6 @@ class Journey
 
   def touch_in(station)
     raise('You have already tapped in!') if @in_journey == true
-
     @in_journey = true
     @one_journey = { station => @exit_station }
     @entry_station = station

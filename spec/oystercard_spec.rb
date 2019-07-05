@@ -45,13 +45,6 @@ describe Oystercard do
     it 'raises an error if there are insufficient funds' do
       expect{ subject.touch_in("Kings Cross") }.to raise_error("Insufficient funds")
     end
-
-    it "allows a user to know where they've travelled from" do
-      subject.top_up 5
-      subject.touch_in("Kings Cross")
-      expect(subject.entry_station).to eq "Kings Cross"
-    end
-
   end
 
   describe '#touch_out' do
@@ -69,14 +62,14 @@ describe Oystercard do
     end
   end
 
-  describe '#all_journeys' do
-    it "stores all journeys" do
-      subject.top_up 5
-      subject.touch_in "Kings Cross"
-      subject.touch_out "Hammersmith"
-      expect(subject.all_journeys).to eq ([{"Kings Cross" => "Hammersmith"}])
-    end
-  end
+  # describe '#all_journeys' do
+  #   it "stores all journeys" do
+  #     subject.top_up 5
+  #     subject.touch_in "Kings Cross"
+  #     subject.touch_out "Hammersmith"
+  #     expect(subject.all_journeys).to eq ([{"Kings Cross" => "Hammersmith"}])
+  #   end
+  # end
 
 end
 
